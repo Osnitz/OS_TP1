@@ -40,14 +40,14 @@ int main() {
         sprintf(command, "%d", ppid);
         printf("\n Memory map of PID %s:\n", command);
         execlp("pmap", "pmap", "-X", command, NULL);
-        perror("execlp a échoué");
+        perror("execlp failed");
         exit(EXIT_FAILURE);
     }
     else if(pid>0) {
         wait(NULL);
     }
     else {
-        perror("fork a échoué");
+        perror("fork failed");
         exit(EXIT_FAILURE);
     }
     free (heap_var);
