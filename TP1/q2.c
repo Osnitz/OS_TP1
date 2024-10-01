@@ -1,0 +1,46 @@
+//
+// Created by matthieu on 01/10/24.
+//
+#include "main.h"
+int main() {
+    // Question 2 - Projection de fichier en mémoire
+    const char* filename = "test.txt";
+    int fd = open(filename, O_RDWR);
+    if (fd == -1) {
+        perror("open");
+        return 1;
+    }
+    struct stat file_stat;
+    if (fstat(fd, &file_stat) == -1) {
+        perror("fstat");
+        return 1;
+    }
+    size_t file_size = file_stat.st_size;
+
+    //Mapping du fichier en mémoire
+    char *file_in_memory = mmap(NULL, file_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+    if (file_in_memory == MAP_FAILED) {
+        perror("Erreur lors du mapping mémoire");
+        close(fd);
+        exit(EXIT_FAILURE);
+    }
+
+    // Inversion du fichier
+    for (size_t i = 0; i < file_size / 2; i++) {
+        char tmp = file_in_memory[i];
+        file_in_memory[i] = file_in_memory[file_size - 1 - i];
+        file_in_memory[file_size - 1 - i] = tmp;
+    }
+
+    // Mettre fin au mapping
+    if (munmap(file_in_memory, file_size) == -1) {
+        perror("Erreur lors du unmapping mémoire");
+        close(fd);
+        exit(EXIT_FAILURE);
+    }
+
+    close(fd);
+
+
+    return 0;
+}
