@@ -2,7 +2,7 @@
 // Created by matthieu on 01/10/24.
 //
 #include "main.h"
-int main() {
+int q2_main() {
     //  2 - Projection of a file in memory
     const char* filename = "test.txt";
     int fd = open(filename, O_RDWR);

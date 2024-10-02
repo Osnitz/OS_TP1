@@ -13,4 +13,8 @@
 #include <string.h>
 #include <fcntl.h>    // Pour open()
 #include <sys/stat.h> // Pour stat()
+
+int q1_main();
+int q2_main();
+int q3_main();
 #endif //MAIN_H

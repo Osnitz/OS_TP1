@@ -6,7 +6,7 @@ int data = 42;
 int bss;
 const char* str = "Hello World!";
 
-int main() {
+int q1_main() {
     //printf("Hello, World!\n");
 
     int *heap_var = (int*) malloc(sizeof(int));
@@ -20,7 +20,7 @@ int main() {
     printf("Text adress: %p\n", (void*)&str);
     printf("Heap adress: %p\n", (void*)heap_var);
     printf("Stack adress: %p\n", (void*)&stack_var);
-    printf(".txt adress: %p\n", (void*)&main);
+    printf(".txt adress: %p\n", (void*)&q1_main);
     printf("LibC Function address (strcpy): %p\n", (void*)&strcpy);
 
     void *mmap_region = mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
